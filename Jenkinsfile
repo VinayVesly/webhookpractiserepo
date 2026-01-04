@@ -14,9 +14,6 @@ pipeline {
         }
 
         stage('Deploy') {
-            agent {
-                label 'ec2-agent'
-            }
             steps {
                 echo "Deploy running on EC2 agent"
             }
