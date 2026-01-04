@@ -1,28 +1,27 @@
 pipeline {
-    agent {
-        label 'dev_slave1'
-    }
-
-    parameters {
-        choice(name: 'ENV', choices: ['dev', 'qa', 'prod'], description: 'Select environment')
-        string(name: 'BRANCH', defaultValue: 'main', description: 'Git branch')
-        booleanParam(name: 'DEPLOY', defaultValue: true, description: 'Deploy application')
+    agent none
+    environment {
+        project = caleston
     }
 
     stages {
         stage('Build') {
+            agent {
+                label 'docker'
+            }
             steps {
-                echo "Building from branch: ${params.BRANCH}"
+                echo "Printing the variable $project"
             }
         }
 
         stage('Deploy') {
-            when {
-                expression { params.DEPLOY }
+            agent {
+                label 'ec2-agent'
             }
             steps {
-                echo "Deploying to ${params.ENV}"
+                echo "Deploy running on EC2 agent"
             }
         }
     }
 }
+
