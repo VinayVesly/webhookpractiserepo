@@ -1,7 +1,7 @@
 pipeline {
     agent none
     environment {
-        project = caleston
+        project = "caleston"
     }
 
     stages {
