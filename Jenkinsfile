@@ -1,14 +1,13 @@
 pipeline {
-    agent none
+    agent {
+        label 'dev_slave1'
+    }
     environment {
         project = "caleston"
     }
 
     stages {
         stage('Build') {
-            agent {
-                label 'docker'
-            }
             steps {
                 echo "Printing the variable $project"
             }
